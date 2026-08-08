@@ -1,10 +1,9 @@
 
 
-const examples = [
-  "ROMEO:",
-  "To be, or not to be,",
-  "First Citizen:"
-];
+const examplesByModel = {
+  shakespeare: ["ROMEO:", "To be, or not to be,", "First Citizen:"],
+  hindi: ["Hello", "नमस्ते", "ज्ञान", "Bonjour"],
+};
 
 const chatWindow = document.getElementById('chatWindow');
 const promptInput = document.getElementById('promptInput');
@@ -14,11 +13,11 @@ const examplePrompts = document.getElementById('examplePrompts');
 const modelSelect = document.getElementById('modelSelect');
 
 // Renders the clickable example-prompt chips in the sidebar.
-function renderExamples() {
-  examplePrompts.innerHTML = examples
+function renderExamples(modelKey) {
+  const list = examplesByModel[modelKey] || examplesByModel.shakespeare;
+  examplePrompts.innerHTML = list
     .map((example) => `<button class="chip" data-example="${example}">${example}</button>`)
     .join('');
-
   examplePrompts.querySelectorAll('.chip').forEach((button) => {
     button.addEventListener('click', () => {
       promptInput.value = button.dataset.example;
