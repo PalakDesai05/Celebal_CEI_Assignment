@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PalakGPT - a transformer built from scratch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <!-- Sidebar: brand identity, example prompts, live model stats -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">P</div>
+          <div>
+            <h1>PalakGPT</h1>
+            <p>a decoder-only transformer, trained from scratch</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Try a prompt</h2>
+          <div class="chip-list" id="examplePrompts"></div>
+        </div>
+
+        <div class="panel stats-panel">
+          <h2>Model</h2>
+          <div class="stat-card">
+            <strong>Architecture</strong>
+            <span id="statArch">-</span>
+          </div>
+          <div class="stat-card">
+            <strong>Parameters</strong>
+            <span id="statParams">-</span>
+          </div>
+          <div class="stat-card">
+            <strong>Tokenizer</strong>
+            <span id="statTokenizer">-</span>
+          </div>
+          <div class="stat-card">
+            <strong>Trained on</strong>
+            <span id="statData">Tiny Shakespeare</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main panel: chat window + composer -->
+      <main class="main-panel">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Playground</p>
+            <h2>Give it an opening line</h2>
+          </div>
+          <button id="clearBtn" class="secondary-btn">Clear chat</button>
+        </header>
+
+        <section class="chat-window" id="chatWindow" aria-live="polite"></section>
+
+        <section class="composer">
+          <label class="visually-hidden" for="promptInput">Enter a prompt</label>
+          <textarea id="promptInput" rows="4" placeholder="ROMEO:"></textarea>
+          <div class="composer-actions">
+  <select id="modelSelect" aria-label="Select model"></select>
+  <select id="modeSelect" aria-label="Select response mode">
+    <option value="creative">Creative</option>
+    <option value="concise">Concise</option>
+    <option value="technical">Technical</option>
+  </select>
+  <button id="generateBtn">Generate</button>
+</div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

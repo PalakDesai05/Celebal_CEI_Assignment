@@ -1,0 +1,299 @@
+
+:root {
+  color-scheme: dark;
+  --bg: #14110f;              /* ink well */
+  --panel: #1c1712;           /* aged wood panel */
+  --panel-strong: #241d16;
+  --border: rgba(233, 218, 183, 0.12);
+  --text: #ece4d3;            /* candlelight parchment */
+  --muted: #9a8f78;
+  --accent: #c9a227;          /* brass / gold leaf */
+  --accent-strong: #e0bc4a;
+  --seal: #8b2d2d;            /* wax seal red - used once, deliberately */
+  --parchment: #f3e9d2;       /* actual paper, for the model's own words */
+  --parchment-ink: #2a2118;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(201, 162, 39, 0.06), transparent 45%),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+button, textarea, select { font: inherit; }
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  min-height: 100vh;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  padding: 28px 24px;
+  border-right: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 4px;
+  background: linear-gradient(160deg, var(--accent-strong), var(--accent));
+  color: #1c1712;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.brand h1 {
+  margin: 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+.brand p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.panel h2 {
+  margin: 0 0 12px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  border: 1px solid var(--border);
+  background: rgba(233, 218, 183, 0.04);
+  color: var(--text);
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+}
+
+.stat-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.82rem;
+}
+
+.stat-card:last-child { border-bottom: none; }
+
+.stat-card strong {
+  color: var(--muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+}
+
+.stat-card span {
+  color: var(--accent-strong);
+  text-align: right;
+}
+
+/* ---------- Main panel ---------- */
+.main-panel {
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--accent);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.topbar h2 {
+  margin: 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+.secondary-btn,
+#generateBtn {
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: transform 0.1s ease, filter 0.15s ease;
+}
+
+.secondary-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.secondary-btn:hover { color: var(--text); border-color: var(--accent); }
+
+/* The one saturated, deliberate accent moment on the page */
+#generateBtn {
+  background: var(--seal);
+  color: var(--parchment);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+#generateBtn:hover:not(:disabled) { filter: brightness(1.12); }
+#generateBtn:active:not(:disabled) { transform: scale(0.98); }
+#generateBtn:disabled { opacity: 0.5; cursor: default; }
+
+.chat-window {
+  flex: 1;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.message {
+  max-width: 78%;
+  padding: 13px 16px;
+  border-radius: 8px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  font-size: 0.88rem;
+}
+
+/* user prompts: plain ink panel */
+.message.user {
+  align-self: flex-end;
+  background: var(--panel-strong);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* model output rendered as parchment - it's literally what the
+   model wrote, so it gets the paper treatment */
+.message.assistant {
+  align-self: flex-start;
+  background: var(--parchment);
+  color: var(--parchment-ink);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 0.95rem;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.composer {
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text);
+  min-height: 100px;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.composer-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+select {
+  flex: 1;
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 0.82rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 900px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { border-right: 0; border-bottom: 1px solid var(--border); }
+}
