@@ -77,6 +77,4 @@ Each week's notebook is self-contained. To run any of them:
 
 ---
 
-## 📌 Notes
 
-This repository is actively updated as new weekly assignments and projects are completed during the internship.
